@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Schnorr {
 
-    public BigInteger p, q, h, v, r, X, s1, s2;
+    public BigInteger p, q, h, v, r, X, s1, s2, Z;
     private BigInteger a;
     private static final int keySize = 512;
     private static final int qBits = 140;
@@ -25,6 +25,7 @@ public class Schnorr {
     }
 
     public void KeyGenerator() {
+
         //  Wybierane są:
         //  liczba pierwsza q: q > 2^140
         //  liczba pierwsza p: (p-1)/q nalezy do naturalnych i p > 2^512
@@ -88,7 +89,6 @@ public class Schnorr {
         s2 = r.add(a.multiply(s1)).mod(q);
 
         return new BigInteger[]{s1, s2};
-
     }
 
     public BigInteger[] signGenerator(String M){
@@ -106,7 +106,42 @@ public class Schnorr {
         s2 = r.add(a.multiply(s1)).mod(q);
 
         return new BigInteger[]{s1, s2};
+    }
 
+    public boolean signVerificator(byte[] M, BigInteger[] sign){
+
+        //  Obliczanie Z = h^(s2) * v^(s1) mod p
+        Z = h.modPow(s2, p).multiply(v.modPow(s1, p)).mod(p);
+
+        //  konkatencja Z i M
+        byte zBytes[] = Z.toByteArray();
+        byte con[] = new byte[M.length+zBytes.length];
+
+        for(int i = 0; i < M.length; i++) {
+            con[i] = M[i];
+        }
+        for(int i = 0; i < zBytes.length; i++){
+            con[M.length+i] = zBytes[i];
+        }
+        digest.update(con);
+        BigInteger f = new BigInteger(1, digest.digest());
+
+        //  Sprawdzamy, czy s1 = f (funkcja haszująca konkatenacje M i X)
+        if(f.compareTo(s1) == 0) return true;
+        else return false;
+    }
+
+    public boolean signVerificator(String M, BigInteger[] sign){
+
+        Z = h.modPow(s2, p).multiply(v.modPow(s1, p)).mod(p);
+
+        //  konkatencja Z i M
+        String con = M + Z.toString();
+        digest.update(con.getBytes());
+
+        BigInteger f = new BigInteger(1, digest.digest());
+        if(f.compareTo(s1) == 0) return true;
+        else return false;
     }
 
 }
