@@ -20,7 +20,7 @@ public class DES {
         return new byte[0];
     }
 
-    public byte[] encode() {
+    public byte[] encode(byte[] text) {
 
         byte[] key0 = Utils.selectBits(
                 key, new byte[] {
@@ -93,7 +93,7 @@ public class DES {
         return new byte[0];
     }
 
-    public byte[] decode() {
+    public byte[] decode(byte[] cipher) {
         return new byte[0];
     }
 
