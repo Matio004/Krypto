@@ -1,9 +1,12 @@
 package org.example;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Utils {
 
     public static byte[] selectBits(byte[] array, byte[] bits) {
-        byte[] bytes = new byte[bits.length/8];
+        byte[] bytes = new byte[(bits.length % 8 == 0) ? bits.length/8 : bits.length/8 + 1];
 
         for (int i = 0; i < bits.length; i++) {
             setBit(bytes, i, isBitSet(array, bits[i]));
@@ -46,6 +49,15 @@ public class Utils {
 
         System.arraycopy(h0, 0, temp, 0, h0.length);
         System.arraycopy(h1, 0, temp, h0.length, h1.length);
+        return temp;
+    }
+
+    public static byte[] xor(byte[] b1, byte[] b2) {
+        byte[] temp = new byte[b1.length];
+
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = (byte) (b1[i] ^ b2[i]);
+        }
         return temp;
     }
 }
