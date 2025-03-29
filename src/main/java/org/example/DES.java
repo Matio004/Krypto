@@ -177,6 +177,10 @@ public class DES {
     }
 
     public byte[] decode(byte[] bytes) {
+        if (bytes.length % 8 != 0) {
+            throw new RuntimeException("Nie można odszyfrować");
+        }
+
         byte[] results = new byte[bytes.length];
 
         for (int i = bytes.length / 8 - 1; i >= 0; i--) {

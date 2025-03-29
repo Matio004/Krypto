@@ -3,11 +3,13 @@ package org.fxapp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import org.example.DES;
 
 import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DESController extends AbstractController {
@@ -36,6 +38,8 @@ public class DESController extends AbstractController {
 
     private boolean modeFile = false;
 
+    private ArrayList<Byte> byteArrayList;
+    private ArrayList<Byte> encodedBytesArrayList;
     private byte[] bytes;
     private byte[] encodedBytes;
 
@@ -99,18 +103,13 @@ public class DESController extends AbstractController {
 
     @FXML
     public void decode(ActionEvent actionEvent) {
-        /*if (!modeFile) {
-            encodedBytes = cipherTextFiled.getText().getBytes();
-        }*/
+
         bytes = des.decode(encodedBytes);
         textField.setText(new String(bytes));
     }
 
     @FXML
     public void encode(ActionEvent actionEvent) {
-        if (!modeFile) {
-            bytes = textField.getText().getBytes();
-        }
         encodedBytes = des.encode(bytes);
         cipherTextFiled.setText(new String(encodedBytes));
     }
@@ -181,5 +180,13 @@ public class DESController extends AbstractController {
 
         textField.setDisable(true);
         cipherTextFiled.setDisable(true);
+    }
+
+    public void onText(KeyEvent keyEvent) {
+        bytes = textField.getText().getBytes();
+    }
+
+    public void onCipheredText(KeyEvent keyEvent) {
+        encodedBytes = textField.getText().getBytes();
     }
 }
