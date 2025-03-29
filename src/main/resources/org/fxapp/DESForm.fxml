@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapp.DESController">
+   <children>
+      <RadioButton layoutX="28.0" layoutY="43.0" mnemonicParsing="false" onAction="#onModeText" selected="true" text="Tekst">
+         <toggleGroup>
+            <ToggleGroup fx:id="mode" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="28.0" layoutY="72.0" mnemonicParsing="false" onAction="#onModeFile" text="Plik" toggleGroup="$mode" />
+      <Text layoutX="28.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DES" wrappingWidth="40.799999999999955" />
+      <Button layoutX="423.0" layoutY="10.0" mnemonicParsing="false" onAction="#onSchnorr" text="Schnorr" />
+      <TextField fx:id="loadFileText" disable="true" layoutX="28.0" layoutY="144.0" />
+      <Button fx:id="loadFileBttn" disable="true" layoutX="178.0" layoutY="145.0" mnemonicParsing="false" onAction="#onLoadFile" text="Wczytaj" />
+      <Text layoutX="27.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wczytaj" />
+      <TextArea fx:id="textField" layoutX="27.0" layoutY="224.0" prefHeight="200.0" prefWidth="206.0" />
+      <Text layoutX="28.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tekst do zaszyfrowania" />
+      <TextArea fx:id="cipherTextFiled" disable="true" layoutX="253.0" layoutY="224.0" prefHeight="200.0" prefWidth="206.0" />
+      <Text layoutX="252.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tekst zaszyfrowany" />
+      <Button layoutX="320.0" layoutY="188.0" mnemonicParsing="false" onAction="#decode" text="Deszyfruj" />
+      <Button layoutX="101.0" layoutY="188.0" mnemonicParsing="false" onAction="#encode" text="Szyfruj" />
+      <Button fx:id="saveFileBttn1" layoutX="403.0" layoutY="455.0" mnemonicParsing="false" onAction="#onSaveFile1" prefHeight="26.0" prefWidth="58.0" text="Zapisz" />
+      <TextField fx:id="saveFileText1" layoutX="253.0" layoutY="455.0" />
+      <Text layoutX="253.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zapisz" />
+      <Text layoutX="144.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klucz" />
+      <TextField fx:id="keyInput" layoutX="174.0" layoutY="59.0" />
+      <Button fx:id="saveFileBttn" layoutX="178.0" layoutY="455.0" mnemonicParsing="false" onAction="#onSaveFile" prefHeight="26.0" prefWidth="58.0" text="Zapisz" />
+      <TextField fx:id="saveFileText" layoutX="28.0" layoutY="455.0" />
+      <Text layoutX="28.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zapisz" />
+      <TextField fx:id="loadFileText1" disable="true" layoutX="253.0" layoutY="145.0" prefHeight="26.0" prefWidth="150.0" />
+      <Button fx:id="loadFileBttn1" disable="true" layoutX="403.0" layoutY="145.0" mnemonicParsing="false" onAction="#onLoadFile1" text="Wczytaj" />
+      <Text layoutX="253.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wczytaj" />
+      <Button layoutX="325.0" layoutY="59.0" mnemonicParsing="false" onAction="#setKey" text="Ustaw klucz" />
+   </children>
+</AnchorPane>

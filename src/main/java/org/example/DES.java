@@ -63,7 +63,7 @@ public class DES {
         generateSubKeys();
     }
 
-    public void generateSubKeys() {
+    private void generateSubKeys() {
         this.subKeys = new byte[16][];
 
         byte[] halfL = Utils.selectBits(
@@ -100,7 +100,7 @@ public class DES {
 
     }
 
-    public byte[] doSBox(byte[] bytes) {
+    private byte[] doSBox(byte[] bytes) {
         byte row;
         byte col;
         byte[] out = new byte[4];
@@ -122,7 +122,7 @@ public class DES {
         return out;
     }
 
-    public byte[] encodeBlock(byte[] bytes) {
+    private byte[] encodeBlock(byte[] bytes) {
         byte[] r = rightBlock(bytes);
         byte[] l = leftBlock(bytes);
 
@@ -139,7 +139,7 @@ public class DES {
         return Utils.connectHalves(r, l);
     }
 
-    public byte[] decodeBlock(byte[] bytes) {
+    private byte[] decodeBlock(byte[] bytes) {
         byte[] r = rightBlock(bytes);
         byte[] l = leftBlock(bytes);
 
