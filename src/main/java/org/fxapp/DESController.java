@@ -9,7 +9,6 @@ import org.example.DES;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DESController extends AbstractController {
@@ -36,10 +35,6 @@ public class DESController extends AbstractController {
     @FXML
     public Button loadFileBttn1;
 
-    private boolean modeFile = false;
-
-    private ArrayList<Byte> byteArrayList;
-    private ArrayList<Byte> encodedBytesArrayList;
     private byte[] bytes;
     private byte[] encodedBytes;
 
@@ -103,9 +98,12 @@ public class DESController extends AbstractController {
 
     @FXML
     public void decode(ActionEvent actionEvent) {
-
-        bytes = des.decode(encodedBytes);
-        textField.setText(new String(bytes));
+        try {
+            bytes = des.decode(encodedBytes);
+            textField.setText(new String(bytes));
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -156,8 +154,6 @@ public class DESController extends AbstractController {
 
     @FXML
     public void onModeText(ActionEvent actionEvent) {
-        modeFile = false;
-
         loadFileBttn.setDisable(true);
         loadFileText.setDisable(true);
 
@@ -170,7 +166,6 @@ public class DESController extends AbstractController {
 
     @FXML
     public void onModeFile(ActionEvent actionEvent) {
-        modeFile = true;
 
         loadFileBttn.setDisable(false);
         loadFileText.setDisable(false);
