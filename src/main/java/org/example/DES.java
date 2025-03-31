@@ -144,7 +144,7 @@ public class DES {
         return out;
     }
 
-    public byte[] encodeBlock(byte[] bytes) {
+    private byte[] encodeBlock(byte[] bytes) {
         bytes = Utils.selectBits(bytes, ip);
 
         byte[] r = rightBlock(bytes);
@@ -163,7 +163,7 @@ public class DES {
         return Utils.selectBits(Utils.connectHalves(r, l), ipInv);
     }
 
-    public byte[] decodeBlock(byte[] bytes) {
+    private byte[] decodeBlock(byte[] bytes) {
         bytes = Utils.selectBits(bytes, ip);
         byte[] r = rightBlock(bytes);
         byte[] l = leftBlock(bytes);
