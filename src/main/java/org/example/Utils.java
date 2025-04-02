@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.Arrays;
-import java.util.Objects;
 
 public class Utils {
 
@@ -59,5 +57,18 @@ public class Utils {
             temp[i] = (byte) (b1[i] ^ b2[i]);
         }
         return temp;
+    }
+
+    public static byte hexFromChar(char chr) {
+        return switch (chr) {
+            case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> (byte) (chr - 48);
+            case 'a', 'A' -> 10;
+            case 'b', 'B' -> 11;
+            case 'c', 'C' -> 12;
+            case 'd', 'D' -> 13;
+            case 'e', 'E' -> 14;
+            case 'f', 'F' -> 15;
+            default -> -1;
+        };
     }
 }

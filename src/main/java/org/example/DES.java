@@ -85,6 +85,15 @@ public class DES {
         generateSubKeys();
     }
 
+    public DES(String key) {
+        this.key = new byte[8];
+        byte[] temp = key.getBytes();
+        for (int i = 0; i < this.key.length; i++) {
+            this.key[i] = (byte) (Utils.hexFromChar((char) temp[2*i]) << 4 | Utils.hexFromChar((char) temp[2 * i + 1]));
+        }
+        generateSubKeys();
+    }
+
     private void generateSubKeys() {
         this.subKeys = new byte[16][];
 

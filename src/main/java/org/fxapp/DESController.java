@@ -5,15 +5,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
+import javafx.scene.text.Text;
 import org.example.DES;
 
 import java.io.*;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class DESController extends AbstractController {
     @FXML
-    public TextField loadFileText;
+    public Text loadFileText;
     @FXML
     public Button loadFileBttn;
     @FXML
@@ -23,15 +25,15 @@ public class DESController extends AbstractController {
     @FXML
     public Button saveFileBttn1;
     @FXML
-    public TextField saveFileText1;
+    public Text saveFileText1;
     @FXML
     public TextField keyInput;
     @FXML
     public Button saveFileBttn;
     @FXML
-    public TextField saveFileText;
+    public Text saveFileText;
     @FXML
-    public TextField loadFileText1;
+    public Text loadFileText1;
     @FXML
     public Button loadFileBttn1;
 
@@ -56,17 +58,13 @@ public class DESController extends AbstractController {
     }
 
     @FXML
-    public void onSchnorr(ActionEvent actionEvent) {
-        //todo switch do schnorr
-    }
-
-    @FXML
     public void onLoadFile(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Wczytaj odszyfrowany plik");
 
         File file = fileChooser.showOpenDialog(getStage());
         if (file != null) {
+            loadFileText.setText(file.toString());
             try (FileInputStream stream = new FileInputStream(file)) {
                 bytes = stream.readAllBytes();
                 textField.setText(new String(bytes));
@@ -85,6 +83,7 @@ public class DESController extends AbstractController {
 
         File file = fileChooser.showOpenDialog(getStage());
         if (file != null) {
+            loadFileText1.setText(file.toString());
             try (FileInputStream stream = new FileInputStream(file)) {
                 encodedBytes = stream.readAllBytes();
                 cipherTextFiled.setText(new String(encodedBytes));
@@ -98,6 +97,10 @@ public class DESController extends AbstractController {
 
     @FXML
     public void decode(ActionEvent actionEvent) {
+        if (des == null) {
+            System.out.println("Nie ustawiono klucza");
+            return;
+        }
         try {
             bytes = des.decode(encodedBytes);
             textField.setText(new String(bytes));
@@ -108,6 +111,10 @@ public class DESController extends AbstractController {
 
     @FXML
     public void encode(ActionEvent actionEvent) {
+        if (des == null) {
+            System.out.println("Nie ustawiono klucza");
+            return;
+        }
         encodedBytes = des.encode(bytes);
         cipherTextFiled.setText(new String(encodedBytes));
     }
@@ -119,6 +126,7 @@ public class DESController extends AbstractController {
 
         File file = fileChooser.showSaveDialog(getStage());
         if (file != null) {
+            saveFileText.setText(file.toString());
             try (FileOutputStream stream = new FileOutputStream(file)) {
                 stream.write(bytes);
             } catch (IOException _) {
@@ -136,6 +144,7 @@ public class DESController extends AbstractController {
 
         File file = fileChooser.showSaveDialog(getStage());
         if (file != null) {
+            saveFileText1.setText(file.toString());
             try (FileOutputStream stream = new FileOutputStream(file)) {
                 stream.write(encodedBytes);
             } catch (IOException _) {
@@ -148,8 +157,11 @@ public class DESController extends AbstractController {
 
     @FXML
     public void setKey(ActionEvent actionEvent) {
-        des = new DES(keyInput.getText().getBytes());
-
+        if (keyInput.getText().length() != 16) {
+            System.out.println("Zły rozmiar klucza");
+            return;
+        }
+        des = new DES(keyInput.getText());
     }
 
     @FXML
@@ -183,5 +195,20 @@ public class DESController extends AbstractController {
 
     public void onCipheredText(KeyEvent keyEvent) {
         encodedBytes = textField.getText().getBytes();
+    }
+
+    @FXML
+    public void generateKey(ActionEvent actionEvent) {
+        Random random = new Random();
+
+        char[] temp = "0123456789abcdef".toCharArray();
+        keyInput.setText("");
+
+        StringBuilder key = new StringBuilder();
+        for (int i = 0; i < 16; i++) {
+            key.append(temp[random.nextInt(16)]);
+        }
+
+        keyInput.setText(key.toString());
     }
 }
