@@ -26,9 +26,12 @@ public class SchnorrController extends AbstractController{
     public Button loadMessageBtn;
     @FXML
     public Text loadedFileLabel;
+    @FXML
+    public Button loadSignBtn;
 
     private Schnorr schnorr;
     private byte[] messageBytes;
+    private byte[] signatureBytes;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -46,8 +49,23 @@ public class SchnorrController extends AbstractController{
         if (file != null) {
             loadedFileLabel.setText(file.getName());
             try (FileInputStream fis = new FileInputStream(file)) {
-                messageBytes = fis.readAllBytes();
+                signatureBytes = fis.readAllBytes();
                 messageTextArea.setText(new String(messageBytes));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    @FXML
+    public void onLoadSign() {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Załaduj plik");
+        File file = chooser.showOpenDialog(null);
+        if (file != null) {
+            loadedFileLabel.setText(file.getName());
+            try (FileInputStream fis = new FileInputStream(file)) {
+                signatureBytes = fis.readAllBytes();
+                signatureOutput.setText(new String(signatureBytes));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -86,7 +104,7 @@ public class SchnorrController extends AbstractController{
         verificationResult.setText(valid ? "Podpis jest prawidłowy." : "Podpis jest nieprawidłowy.");
     }
     @FXML
-    public void saveToFile(javafx.event.ActionEvent actionEvent) {
+    public void saveToFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Zapisz do pliku");
 

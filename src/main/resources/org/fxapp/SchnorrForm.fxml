@@ -26,6 +26,7 @@
                 <Button onAction="#onSignMessage" text="Podpisz" />
                 <Button onAction="#onVerifySignature" text="Zweryfikuj podpis" />
                 <Button onAction="#saveToFile" text="Zapisz wynik" />
+                <Button fx:id="loadSignBtn" onAction="#onLoadSign" text="Załaduj plik" />
             </HBox>
 
             <TextArea fx:id="signatureOutput" prefHeight="60.0" prefWidth="478.0" promptText="Podpis" />
