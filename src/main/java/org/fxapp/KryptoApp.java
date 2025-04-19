@@ -13,7 +13,7 @@ public class KryptoApp extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle(TITLE);
-        Navigator.switchPage(DESController.class, stage);
+        Navigator.switchPage(SchnorrController.class, stage);
     }
 }
 

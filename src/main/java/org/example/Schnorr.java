@@ -15,6 +15,18 @@ public class Schnorr {
     private static final Random random = new Random();
     MessageDigest digest;
 
+    private void concatenation(byte[] M, byte[] xBytes) {
+        byte[] con = new byte[M.length+xBytes.length];
+
+        System.arraycopy(M, 0, con, 0, M.length);
+
+        for (int i=0, j=0; j<xBytes.length; i++,j++){
+            con[M.length+i]=xBytes[j];
+        }
+
+        digest.update(con);
+    }
+
     public Schnorr()
     {
         KeyGenerator();
@@ -51,17 +63,7 @@ public class Schnorr {
 
     }
 
-    private void concatenation(byte[] M, byte[] xBytes) {
-        byte[] con = new byte[M.length+xBytes.length];
 
-        System.arraycopy(M, 0, con, 0, M.length);
-
-        for (int i=0, j=0; j<xBytes.length; i++,j++){
-            con[M.length+i]=xBytes[j];
-        }
-
-        digest.update(con);
-    }
     // Generowanie podpisu na dokumencie M
     public BigInteger[] signGenerator(byte[] M)
     {
@@ -82,9 +84,6 @@ public class Schnorr {
 
         return new BigInteger[]{s1,s2};
     }
-
-
-
 
     public BigInteger[] signGenerator(String M)
     {
