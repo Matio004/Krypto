@@ -39,7 +39,7 @@
             </HBox>
 
             <TextArea fx:id="signatureOutput" prefHeight="60.0" prefWidth="478.0" promptText="Podpis" style="-fx-background-color: gray;" />
-            <Text fx:id="verificationResult" style="-fx-font-weight: bold;" />
+            <Text fx:id="verificationResult" style="-fx-font-weight: bold; -fx-fill: white;" />
         </VBox>
     </center>
 </BorderPane>
