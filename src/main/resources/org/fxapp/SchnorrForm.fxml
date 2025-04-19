@@ -13,9 +13,9 @@
 
     <center>
         <VBox alignment="TOP_CENTER" spacing="10" style="-fx-background-color: black;">
-         <HBox>
+         <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="74.0">
             <children>
-                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="478.0" style="-fx-font-size: 18px;" text="Schnorr" textAlignment="RIGHT" textFill="#efb3b3">
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="89.0" style="-fx-font-size: 18px;" text="Schnorr" textAlignment="CENTER" textFill="#efb3b3">
                   <font>
                      <Font name="System Bold" size="12.0" />
                   </font>
@@ -28,7 +28,7 @@
                 <Text fx:id="loadedFileLabel" fill="#efb3b385" nodeOrientation="RIGHT_TO_LEFT" text="Żaden plik nie został załadowany" textAlignment="CENTER" />
             </HBox>
 
-            <TextArea fx:id="messageTextArea" prefHeight="11.0" prefWidth="478.0" promptText="Wiadomość" />
+            <TextArea fx:id="messageTextArea" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="11.0" prefWidth="297.0" promptText="Wiadomość" />
 
             <HBox alignment="TOP_CENTER" spacing="10.0">
                 <Button onAction="#onGenerateKeys" text="Generuj Klucz" />
