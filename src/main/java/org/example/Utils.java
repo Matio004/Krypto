@@ -1,6 +1,8 @@
 package org.example;
 
 
+import javax.swing.*;
+
 public class Utils {
 
     public static byte[] selectBits(byte[] array, byte[] bits) {
@@ -70,5 +72,23 @@ public class Utils {
             case 'f', 'F' -> 15;
             default -> -1;
         };
+    }
+
+    public static byte[] hexToBytes(String hex)
+    {
+        if (hex == null) return null;
+        else if (hex.length() < 2) return null;
+        else {
+            if (hex.length()%2 != 0) hex+='0';
+            byte[] result = new byte[hex.length()/2];
+
+            for (int i = 0; i < hex.length()/2; i++)
+            { try{
+                result[i] = (byte) Integer.parseInt(hex.substring(i * 2, i * 2 + 2), 16);
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Problem z konwersja hex->bytes.", "Problem z konwersja hex->bytes.", JOptionPane.ERROR_MESSAGE); }
+            }
+            return result;
+        }
     }
 }
