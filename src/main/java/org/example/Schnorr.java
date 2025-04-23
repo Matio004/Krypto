@@ -61,6 +61,7 @@ public class Schnorr {
         //v = h^a mod p
         v=h.modPow(a,p).modInverse(p);
 
+
     }
 
 

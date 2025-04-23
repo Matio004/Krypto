@@ -29,6 +29,8 @@ public class SchnorrController extends AbstractController{
     @FXML
     public Button loadSignBtn;
 
+    //TODO pokazać wygenerowany klucz w GUI
+
     private Schnorr schnorr;
     private byte[] messageBytes;
     private byte[] signatureBytes;
