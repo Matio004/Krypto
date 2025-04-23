@@ -7,8 +7,7 @@ import java.security.*;
 
 public class Schnorr {
 
-    public BigInteger p, q, h, v, r, X, s1, s2, Z;
-    private BigInteger a;
+    public BigInteger a, p, q, h, v, r, X, s1, s2, Z;
 
     private static final int keySize = 512;
     private static final int  qBits = 140;

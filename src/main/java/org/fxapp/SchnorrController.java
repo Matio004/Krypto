@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import org.example.Schnorr;
 import org.example.Utils;
 
-import java.awt.event.ActionEvent;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.URL;
@@ -28,8 +27,8 @@ public class SchnorrController extends AbstractController{
     public Text loadedFileLabel;
     @FXML
     public Button loadSignBtn;
-
-    //TODO pokazać wygenerowany klucz w GUI
+    @FXML
+    public Text generatedKey;
 
     private Schnorr schnorr;
     private byte[] messageBytes;
@@ -78,6 +77,12 @@ public class SchnorrController extends AbstractController{
     public void onGenerateKeys() {
         schnorr.KeyGenerator();
         verificationResult.setText("Klucze wygenerowane.");
+        String keyInfo =
+                schnorr.q.toString(16) + " " + schnorr.h.toString(16) + "\n" +
+                        schnorr.v.toString(16) + "\n" +
+                        schnorr.a.toString(16) + "\n" +
+                        schnorr.p.toString(16);
+        generatedKey.setText(keyInfo.toString());
     }
 
     @FXML

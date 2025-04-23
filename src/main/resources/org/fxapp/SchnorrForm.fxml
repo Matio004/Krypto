@@ -10,9 +10,8 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fxapp.SchnorrController">
-
-    <center>
-        <VBox alignment="TOP_CENTER" spacing="10" style="-fx-background-color: black;">
+   <center>
+        <VBox alignment="TOP_CENTER" prefHeight="388.0" prefWidth="478.0" spacing="10" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="74.0">
             <children>
                   <Label alignment="TOP_CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="89.0" style="-fx-font-size: 18px;" text="Schnorr" textAlignment="CENTER" textFill="#efb3b3">
@@ -25,7 +24,7 @@
 
             <HBox alignment="TOP_CENTER" prefHeight="9.0" prefWidth="478.0" spacing="10.0">
                 <Button fx:id="loadMessageBtn" onAction="#onLoadMessage" style="-fx-background-color: pink;" text="Załaduj plik" />
-                <Text fx:id="loadedFileLabel" fill="#efb3b385" nodeOrientation="RIGHT_TO_LEFT" text="Żaden plik nie został załadowany" textAlignment="CENTER" />
+                <Text fx:id="loadedFileLabel" fill="#edb2b2" nodeOrientation="RIGHT_TO_LEFT" text="Żaden plik nie został załadowany" textAlignment="CENTER" />
             </HBox>
 
             <TextArea fx:id="messageTextArea" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="11.0" prefWidth="297.0" promptText="Wiadomość" />
@@ -37,9 +36,11 @@
                 <Button onAction="#saveToFile" style="-fx-background-color: pink;" text="Zapisz wynik" />
                 <Button fx:id="loadSignBtn" onAction="#onLoadSign" style="-fx-background-color: pink;" text="Załaduj plik" />
             </HBox>
+            <Text fx:id="generatedKey" style="-fx-fill: #ebb2b2; -fx-font-family: monospace; -fx-font-size: 12px;" wrappingWidth="460" />
 
-            <TextArea fx:id="signatureOutput" prefHeight="60.0" prefWidth="478.0" promptText="Podpis" style="-fx-background-color: gray;" />
+                        <TextArea fx:id="signatureOutput" prefHeight="60.0" prefWidth="478.0" promptText="Podpis" style="-fx-background-color: gray;" />
             <Text fx:id="verificationResult" style="-fx-font-weight: bold; -fx-fill: white;" />
+         <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="132.0" spacing="10.0" />
         </VBox>
-    </center>
+   </center>
 </BorderPane>

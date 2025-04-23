@@ -13,7 +13,7 @@ public class KryptoApp extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle(TITLE);
-        Navigator.switchPage(SchnorrController.class, stage);
+        Navigator.switchPage(SchnorrController.class, stage); //change controller for the use of DES if intended
     }
 }
 
