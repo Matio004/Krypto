@@ -50,7 +50,7 @@ public class SchnorrController extends AbstractController{
         if (file != null) {
             loadedFileLabel.setText(file.getName());
             try (FileInputStream fis = new FileInputStream(file)) {
-                signatureBytes = fis.readAllBytes();
+                messageBytes = fis.readAllBytes();
                 messageTextArea.setText(new String(messageBytes));
             } catch (IOException e) {
                 e.printStackTrace();
