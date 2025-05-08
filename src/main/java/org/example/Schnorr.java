@@ -41,42 +41,33 @@ public class Schnorr {
         q=BigInteger.probablePrime(qBits,new Random());
         BigInteger pom;
 
-        // => p = kq + 1
         do {
             p = BigInteger.probablePrime(keySize,new Random());
             pom = p.subtract(BigInteger.ONE);
             p = p.subtract(pom.remainder(q));
         } while (!p.isProbablePrime(2));
 
-        // h^q mod p != 1
         h = new BigInteger(keySize - 2, random);
         h = h.modPow(p.subtract(BigInteger.ONE).divide(q), p);
 
-        // 1 < a < p-1 -> warunek z wykładu???
         do {
             a = new BigInteger(qBits - 2, random);
         } while (!(a.compareTo(BigInteger.ONE) == 1));
 
-        //v = h^a mod p
         v=h.modPow(a,p).modInverse(p);
 
 
     }
 
-
-    // Generowanie podpisu na dokumencie M
     public BigInteger[] signGenerator(byte[] M)
     {
         do {
             r = new BigInteger(qBits, random);
         } while (r.compareTo(q) >= 0);
 
-        //  Obliczane są:
-        //  X = h^r mod p
         X = h.modPow(r, p);
         byte[] xBytes = X.toByteArray();
 
-        // konkatenacja (con) to łączenie dwóch wyrażeń tekstowych w jedno
         concatenation(M, xBytes);
 
         s1 =new BigInteger(1, digest.digest());
@@ -102,13 +93,11 @@ public class Schnorr {
 
     public boolean signVerificator(byte[] M, BigInteger[] sign)
     {
-        //  Obliczanie Z = h^(s2) * v^(s1) mod p
         s1 = sign[0];
         s2 = sign[1];
 
         Z = h.modPow(s2, p).multiply(v.modPow(s1, p)).mod(p);
 
-        //  konkatencja Z i M
         byte[] con =Z.toByteArray();
         concatenation(M, con);
         BigInteger hash=new BigInteger(1, digest.digest());
