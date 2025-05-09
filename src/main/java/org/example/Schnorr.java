@@ -38,13 +38,9 @@ public class Schnorr {
 
     public void KeyGenerator()
     {
-        q=BigInteger.probablePrime(qBits,new Random());
-        BigInteger pom;
-
         do {
-            p = BigInteger.probablePrime(keySize,new Random());
-            pom = p.subtract(BigInteger.ONE);
-            p = p.subtract(pom.remainder(q));
+            q=BigInteger.probablePrime(qBits,new Random()); // q musi dzielić p-1 // p-1 = q // p = q+1
+            p = q.multiply(BigInteger.TWO).add(BigInteger.ONE);
         } while (!p.isProbablePrime(2));
 
         h = new BigInteger(keySize - 2, random);
